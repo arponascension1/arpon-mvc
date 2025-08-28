@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+
+// Include Composer's autoloader
+require __DIR__.'/vendor/autoload.php';
+
+// Bootstrap the application
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$app->boot();
+
+// Get command and arguments from argv
+$args = $_SERVER['argv'];
+$commandName = $args[1] ?? null;
+$commandArgs = array_slice($args, 2);
+
+// Get the console kernel
+$kernel = $app->make(Arpon\Contracts\Console\Kernel::class);
+
+// Get the commands from the kernel
+$commands = $kernel->getCommands();
+
+// Process commands to handle both keyed and non-keyed registrations
+$processedCommands = [];
+foreach ($commands as $key => $class) {
+    if (is_int($key)) {
+        $commandInstance = $app->make($class);
+        $signature = $commandInstance->getSignature();
+        $name = explode(' ', $signature)[0];
+        $processedCommands[$name] = $class;
+    } else {
+        $processedCommands[$key] = $class;
+    }
+}
+
+// Find and execute the command
+if ($commandName && isset($processedCommands[$commandName])) {
+    $commandClass = $processedCommands[$commandName];
+    $command = $app->make($commandClass);
+
+    // Improved argument and option parsing
+    $parsedArgs = [];
+    $parsedOptions = [];
+    foreach ($commandArgs as $arg) {
+        if (str_starts_with($arg, '--')) {
+            $parts = explode('=', substr($arg, 2), 2);
+            $parsedOptions[$parts[0]] = $parts[1] ?? true;
+        } else {
+            $parsedArgs[] = $arg;
+        }
+    }
+
+    $status = $command->handle($parsedArgs, $parsedOptions);
+    exit($status);
+}
+
+// If no command is provided, or the command is not found, display a list of available commands
+echo "Available commands:\n";
+foreach ($processedCommands as $name => $class) {
+    $command = $app->make($class);
+    $description = $command->getDescription();
+    echo "  {$name}: {$description}\n";
+}
+exit(1);
