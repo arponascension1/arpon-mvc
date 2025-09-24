@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Seeders;
+
+use Arpon\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $this->call([
+        ]);
+    }
+
+    protected function call(array $seeders): void
+    {
+        foreach ($seeders as $seeder) {
+            (new $seeder())();
+        }
+    }
+}
