@@ -16,18 +16,8 @@
     }
   ],
   "minimum-stability": "stable",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/arponascension1/arpon-framwork"
-    }
-  ],
   "require": {
     "php": "^8.0",
-    "arponascension1/arpon-framework": "^1.0",
-    "vlucas/phpdotenv": "^5.0",
-    "phpmailer/phpmailer": "^6.0",
-    "ext-pdo": "*",
-    "ext-fileinfo": "*"
+    "arpon/framework": "^1.0"
   }
 }
