@@ -31,10 +31,12 @@ A modern PHP MVC application built with the Arpon Framework featuring user authe
 
 2. **Install the Arpon Framework:**
    
-   Since the `src/` directory (framework core) is not included in this repository, you need to clone it separately:
+   Clone the framework repository as a submodule or directly into your project:
    
    ```bash
-   git clone https://github.com/arponascension1/arpon-framwork.git src
+   git clone https://github.com/arponascension1/arpon-framwork.git framework-temp
+   cp -r framework-temp/src .
+   rm -rf framework-temp
    ```
 
 3. **Install dependencies:**
