@@ -1,0 +1,16 @@
+/src/
+/vendor
+/.env
+/composer.lock
+/database/database.sqlite
+/.idea
+*.log
+.DS_Store
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/framework/cache/.gitkeep
+!storage/framework/sessions/.gitkeep
+!storage/framework/views/.gitkeep
+node_modules/

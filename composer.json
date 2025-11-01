@@ -1,0 +1,29 @@
+{
+  "name": "arpon/arpon",
+  "description": "A custom PHP framework inspired by Laravel.",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Arpon\\": "src/Arpon/"
+    },
+    "files": [
+      "src/Arpon/Support/helpers.php",
+      "src/Arpon/Database/helpers.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Arpon Asscension",
+      "email": "arponascension20@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "vlucas/phpdotenv": "5.*",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*",
+    "phpmailer/phpmailer": "6.*"
+  }
+}
